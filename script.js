@@ -1,5 +1,6 @@
 const imageContainer = document.getElementById("image-container");
 const loader = document.getElementById('loader');
+const error = document.getElementById('error');
 
 // ready for indicator to fetch again afer all images loaded
 let ready = false;
@@ -74,7 +75,7 @@ async function getImages(){
       imagesArray = await response.json();
         displayImages();
     } catch (err) {
-
+        error.textContent = err;
     }
 }
 
@@ -82,7 +83,6 @@ async function getImages(){
 window.addEventListener('scroll', () => {
     if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000 && ready){
         ready = false;
-        console.log('load more');
         getImages();
     }
 })
